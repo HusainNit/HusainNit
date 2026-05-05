@@ -14,20 +14,19 @@ jobs:
           filename: metrics-languages.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
-          committer_gist: ${{ secrets.METRICS_PROFILE_TOKEN }}
           plugin_languages: yes
           plugin_languages_sections: most-used
-          plugin_languages_indepth: yes
           plugin_languages_details: bytes-size, percentage
-          
+          committer_branch: main
+
       - name: Achievements Graph
         uses: lowlighter/metrics@latest
         with:
           filename: metrics-achievements.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
-          committer_gist: ${{ secrets.METRICS_PROFILE_TOKEN }}
           plugin_achievements: yes
-          plugin_achievements_threshold: X 
-          plugin_achievements_only: explorer, octonaut, yolo, pull-shark, galaxy-brain, starstruck, pair-extraordinaire
           plugin_achievements_display: compact
+          plugin_achievements_threshold: X
+          plugin_achievements_only: explorer, octonaut, yolo, pull-shark, galaxy-brain, starstruck, pair-extraordinaire
+          committer_branch: main
