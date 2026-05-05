@@ -8,23 +8,26 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Step 1: Generate Languages Graph
       - name: Languages Graph
-        uses: lowlighter/metrics@master
+        uses: lowlighter/metrics@latest
         with:
-          filename: metrics-languages.svg # Unique filename
+          filename: metrics-languages.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
-          base: "" # This removes the header/avatar to keep it clean
+          base: ""
+          committer_gist: ${{ secrets.METRICS_PROFILE_TOKEN }}
           plugin_languages: yes
           plugin_languages_sections: most-used
-
-      # Step 2: Generate Achievements Graph
+          plugin_languages_indepth: yes
+          plugin_languages_details: bytes-size, percentage
+          
       - name: Achievements Graph
-        uses: lowlighter/metrics@master
+        uses: lowlighter/metrics@latest
         with:
-          filename: metrics-achievements.svg # Unique filename
+          filename: metrics-achievements.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
-          base: "" # Removes header
+          base: ""
+          committer_gist: ${{ secrets.METRICS_PROFILE_TOKEN }}
           plugin_achievements: yes
-          plugin_achievements_threshold: B
-          plugin_achievements_ignored: master, member, collaborator, organizer
+          plugin_achievements_threshold: X 
+          plugin_achievements_only: explorer, octonaut, yolo, pull-shark, galaxy-brain, starstruck, pair-extraordinaire
+          plugin_achievements_display: compact
