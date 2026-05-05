@@ -1,22 +1,30 @@
 name: Metrics
 on:
-  schedule: [{cron: "0 0 * * *"}] # Runs at midnight every day
-  workflow_dispatch: # Allows you to run it manually
+  schedule: [{cron: "0 0 * * *"}]
+  workflow_dispatch:
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: lowlighter/metrics@latest
+      # Step 1: Generate Languages Graph
+      - name: Languages Graph
+        uses: lowlighter/metrics@master
         with:
+          filename: metrics-languages.svg # Unique filename
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
-          user: HusainNit
-          template: classic
-          base: header, activity, community, repositories, metadata
-          # Your requested graphs:
+          base: "" # This removes the header/avatar to keep it clean
           plugin_languages: yes
           plugin_languages_sections: most-used
-          plugin_topics: yes
+
+      # Step 2: Generate Achievements Graph
+      - name: Achievements Graph
+        uses: lowlighter/metrics@master
+        with:
+          filename: metrics-achievements.svg # Unique filename
+          token: ${{ secrets.METRICS_PROFILE_TOKEN }}
+          base: "" # Removes header
           plugin_achievements: yes
           plugin_achievements_threshold: B
-          # plugin_leetcode: yes
-          # plugin_leetcode_user: YOUR_LEETCODE_USERNAME
+          plugin_achievements_ignored: master, member, collaborator, organizer
