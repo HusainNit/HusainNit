@@ -28,20 +28,15 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Achievements Graph
-        uses: gh-metrics/metrics@master
+      - name: Compact display
+        uses: gh-metrics/metrics@latest
         with:
-          user: HusainNit
-          filename: metrics-achievements.svg
+          filename: metrics.plugin.achievements.compact.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
-          # Added retries and debug to help with "unexpected errors"
-          retries: 3
-          retries_delay: 300
-          debug: yes 
           plugin_achievements: yes
+          plugin_achievements_only: >-
+            polyglot, stargazer, sponsor, deployer, member, maintainer, developer,
+            scripter, packager, explorer, infographile, manager
           plugin_achievements_display: compact
           plugin_achievements_threshold: X
-          # Listed clearly to avoid syntax errors
-          plugin_achievements_only: explorer, octonaut, yolo, pull-shark, galaxy-brain, starstruck, pair-extraordinaire
-          committer_branch: main
