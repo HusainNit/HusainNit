@@ -34,7 +34,6 @@ jobs:
           user: HusainNit
           filename: metrics-achievements.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
-          base: ""
           # Added retries and debug to help with "unexpected errors"
           retries: 3
           retries_delay: 300
