@@ -41,11 +41,14 @@
 <br/>
 
 <div align="center">
-<img align="left" src=".github/workflows/img/m1.png" width="450" height="280"/>&nbsp;
-<img align="right" src=".github/workflows/img/m2.png" width="450" height="280"/>
+<img src=".github/workflows/img/m1.png" width="380" height="220"/>&nbsp;
+<img src=".github/workflows/img/m2.png" width="380" height="220"/>
 
-<img align="left" src=".github/workflows/img/m3.png" width="450" height="280"/>&nbsp;
-<img align="right" src=".github/workflows/img/m4.png" width="450" height="280"/>
+<br/>
+
+<img src=".github/workflows/img/m3.png" width="380" height="220"/>&nbsp;
+<img src=".github/workflows/img/m4.png" width="380" height="220"/>
+
 </div>
 
 </details>
