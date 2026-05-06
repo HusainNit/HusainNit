@@ -13,59 +13,12 @@
 >  - [X] Outsourced my last two brain cells to an LLM
 
 ### Tech Stack
-<!-- Row 1: Languages -->
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong> Compiled:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=cpp" />
-  </div>
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong>Interpreted:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=python,js,php,dart" />
-  </div>
-  <div style="display: inline-block;">
-    <strong> Frontend:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=react,html,css,tailwind" />
-  </div>
-</div>
 
-<br/>
+![Compiled](https://img.shields.io/badge/Compiled-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=cpp" height="28"/>&nbsp;&nbsp;&nbsp;![Interpreted](https://img.shields.io/badge/Interpreted-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=python,js,php,dart" height="28"/>&nbsp;&nbsp;&nbsp;![Frontend](https://img.shields.io/badge/Frontend-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=react,html,css,tailwind" height="28"/>
 
-<!-- Row 2: Logic & Data -->
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong> Backend:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=django,nodejs,express" />
-  </div>
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong> Databases:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=postgres,mongodb,mysql,redis" />
-  </div>
-  <div style="display: inline-block;">
-    <strong> Cloud & Ops:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=aws,azure,linux,bash,nginx" />
-  </div>
-</div>
+![Backend](https://img.shields.io/badge/Backend-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=django,nodejs,express" height="28"/>&nbsp;&nbsp;&nbsp;![Databases](https://img.shields.io/badge/Databases-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=postgres,mongodb,mysql,redis" height="28"/>&nbsp;&nbsp;&nbsp;![Cloud & Ops](https://img.shields.io/badge/Cloud_%26_Ops-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=aws,azure,linux,bash,nginx" height="28"/>
 
-<br/>
-
-<!-- Row 3: Mobile, Tools & E-com -->
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong> Mobile:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=flutter,androidstudio" />
-  </div>
-  <div style="display: inline-block; margin-right: 20px;">
-    <strong> Tools & IDEs:</strong><br/>
-    <img src="https://skillicons.dev/icons?i=vscode,visualstudio,cmake,docker,github,postman" />
-  </div>
-  <div style="display: inline-block; vertical-align: top;">
-    <strong> E-Commerce:</strong><br/>
-<a href="https://magento.com">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" width="48" height="48" style="background-color: #1A1A1A; border-radius: 10px; padding: 5px;" />
-</a>
-  </div>
-
+![Mobile](https://img.shields.io/badge/Mobile-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=flutter,androidstudio" height="28"/>&nbsp;&nbsp;&nbsp;![Tools & IDEs](https://img.shields.io/badge/Tools_%26_IDEs-000000?style=for-the-badge)&nbsp;<img src="https://skillicons.dev/icons?i=vscode,visualstudio,cmake,docker,github,postman" height="28"/>&nbsp;&nbsp;&nbsp;![E-Commerce](https://img.shields.io/badge/E--Commerce-000000?style=for-the-badge)&nbsp;<a href="https://magento.com"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" height="28"/></a>
 <br clear="both">
 
 ### Language Statistics & Achievements
