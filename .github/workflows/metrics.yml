@@ -3,7 +3,8 @@ on:
   schedule: [{cron: "0 0 * * *"}]
   workflow_dispatch:
 jobs:
-  github-metrics:
+  # Job 1: Languages
+  github-metrics-languages:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,14 +20,27 @@ jobs:
           plugin_languages_details: bytes-size, percentage
           committer_branch: main
 
+  # Job 2: Achievements
+  github-metrics-achievements:
+    needs: github-metrics-languages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
       - name: Achievements Graph
         uses: lowlighter/metrics@latest
         with:
           filename: metrics-achievements.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
+          # Added retries and debug to help with "unexpected errors"
+          retries: 3
+          retries_delay: 300
+          debug: yes 
+          
           plugin_achievements: yes
           plugin_achievements_display: compact
           plugin_achievements_threshold: X
+          # Listed clearly to avoid syntax errors
           plugin_achievements_only: explorer, octonaut, yolo, pull-shark, galaxy-brain, starstruck, pair-extraordinaire
           committer_branch: main
