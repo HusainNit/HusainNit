@@ -1,3 +1,9 @@
+import random
+from pathlib import Path
+
+out_dir = Path("images/gen")
+out_dir.mkdir(parents=True, exist_ok=True)
+
 main_categories = [
     ("compiled", "COMPILED", "#38BDF8"),
     ("interpreted", "INTERPRETED", "#FACC15"),
@@ -16,52 +22,93 @@ muted_categories = [
     ("discovering", "DISCOVERING"),
 ]
 
-# Wider 288px header to span 4x 68px icons per row cleanly
-top_centered_tpl = """<svg width="288" height="36" viewBox="0 0 288 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="clip_{id}">
-      <rect x="0.5" y="0.5" width="287" height="35" rx="8.5"/>
-    </clipPath>
-    <linearGradient id="glow_{id}" x1="144" y1="0" x2="144" y2="36" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="{color}" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#12161F" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
+discover_subgroups = [
+    ("disc-langs", "LANGS & WEB"),
+    ("disc-cloud", "CLOUD & OPS"),
+    ("disc-data", "DATA & QUEUES"),
+    ("disc-tools", "TOOLS & MORE"),
+]
 
-  <g clip-path="url(#clip_{id})">
-    <rect x="0" y="0" width="288" height="36" fill="#12161F"/>
-    <rect x="0" y="0" width="288" height="36" fill="url(#glow_{id})"/>
-    <rect x="0" y="0" width="288" height="3" fill="{color}"/>
-  </g>
 
-  <rect x="0.5" y="0.5" width="287" height="35" rx="8.5" stroke="#262D3A" stroke-width="1"/>
+def jagged_edge_path(width: int, height: int, seed: str, jitter: float = 2.2) -> str:
+    """Build a closed jagged edge path around the outer perimeter without inner tint."""
+    rng = random.Random(seed)
+    pad = 4.0
+    x0, y0 = pad, pad
+    x1, y1 = width - pad, height - pad
 
-  <text x="144" y="23" text-anchor="middle" fill="#F0F6FC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">{label}</text>
+    pts: list[tuple[float, float]] = []
+
+    top_steps = 8
+    for i in range(top_steps + 1):
+        t = i / top_steps
+        x = x0 + t * (x1 - x0)
+        dy = rng.uniform(-jitter, jitter) if 0 < i < top_steps else 0.0
+        pts.append((round(x, 1), round(y0 + dy, 1)))
+
+    right_steps = 3
+    for i in range(1, right_steps + 1):
+        t = i / right_steps
+        y = y0 + t * (y1 - y0)
+        dx = rng.uniform(-jitter, jitter) if i < right_steps else 0.0
+        pts.append((round(x1 + dx, 1), round(y, 1)))
+
+    for i in range(top_steps - 1, -1, -1):
+        t = i / top_steps
+        x = x0 + t * (x1 - x0)
+        dy = rng.uniform(-jitter, jitter) if i > 0 else 0.0
+        pts.append((round(x, 1), round(y1 + dy, 1)))
+
+    for i in range(right_steps - 1, 0, -1):
+        t = i / right_steps
+        y = y0 + t * (y1 - y0)
+        dx = rng.uniform(-jitter, jitter)
+        pts.append((round(x0 + dx, 1), round(y, 1)))
+
+    commands = [f"M {pts[0][0]} {pts[0][1]}"] + [f"L {x} {y}" for x, y in pts[1:]] + ["Z"]
+    return " ".join(commands)
+
+
+def build_header_svg(
+    slug: str,
+    label: str,
+    accent: str,
+    width: int = 220,
+    height: int = 44,
+    muted: bool = False,
+) -> str:
+    path_d = jagged_edge_path(width, height, seed=f"hdr-{slug}", jitter=2.2 if not muted else 1.7)
+    fill_bg = "#0D1117" if muted else "#12161F"
+    stroke_color = "#484F58" if muted else accent
+    text_color = "#8B949E" if muted else "#F0F6FC"
+    font_size = 10.0 if height <= 30 else (11.5 if muted else 13.0)
+    font_weight = 700 if muted else 800
+    text_y = (height // 2) + 4
+    xml_label = label.replace("&", "&amp;")
+
+    return f"""<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="{path_d}" fill="{fill_bg}" stroke="{stroke_color}" stroke-width="1.5" stroke-linejoin="miter"/>
+  <text x="{width // 2}" y="{text_y}" text-anchor="middle" fill="{text_color}" font-family="DejaVu Sans, Liberation Sans, Arial, Helvetica, sans-serif" font-size="{font_size}" font-weight="{font_weight}" letter-spacing="1">{xml_label}</text>
 </svg>
 """
 
-# Smaller 168x26 muted dashed header for Creative & Discovering
-discovering_muted_tpl = """<svg width="168" height="26" viewBox="0 0 168 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.5" y="0.5" width="167" height="25" rx="7" fill="#0D1117" stroke="#21262D" stroke-dasharray="4 3" stroke-width="1"/>
-  <text x="84" y="16.5" text-anchor="middle" fill="#8B949E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="9.5" font-weight="600" letter-spacing="1.4">{label}</text>
-</svg>
-"""
 
 for slug, label, color in main_categories:
-    safe_id = slug.replace("-", "_")
-    xml_label = label.replace("&", "&amp;")
-    content = top_centered_tpl.format(
-        id=safe_id,
-        label=xml_label,
-        color=color,
+    (out_dir / f"hdr-top-{slug}.svg").write_text(
+        build_header_svg(slug, label, color, width=220, height=44, muted=False),
+        encoding="utf-8",
     )
-    with open(f"images/gen/hdr-top-{slug}.svg", "w", encoding="utf-8") as f:
-        f.write(content)
 
 for slug, label in muted_categories:
-    xml_label = label.replace("&", "&amp;")
-    content = discovering_muted_tpl.format(label=xml_label)
-    with open(f"images/gen/hdr-top-{slug}.svg", "w", encoding="utf-8") as f:
-        f.write(content)
+    (out_dir / f"hdr-top-{slug}.svg").write_text(
+        build_header_svg(slug, label, "#484F58", width=220, height=44, muted=True),
+        encoding="utf-8",
+    )
 
-print("Generated 288px main headers and 168x26 muted headers.")
+for slug, label in discover_subgroups:
+    (out_dir / f"hdr-top-{slug}.svg").write_text(
+        build_header_svg(slug, label, "#484F58", width=150, height=28, muted=True),
+        encoding="utf-8",
+    )
+
+print("Generated jagged-edge SVGs for all categories and Discovering sub-groups.")
