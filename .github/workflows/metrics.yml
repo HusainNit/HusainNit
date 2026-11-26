@@ -4,7 +4,7 @@ on:
     - cron: "0 0 * * 5"
   workflow_dispatch:
 jobs:
-  # Job 1: Languages
+  # Job 1: Languages [https://github.com/lowlighter/metrics]
   github-metrics-languages:
     runs-on: ubuntu-latest
     permissions:
@@ -13,7 +13,7 @@ jobs:
       - name: Languages Graph
         uses: lowlighter/metrics@latest
         with:
-          filename: metrics-languages.svg
+          filename: images/stat/metrics-languages.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
           plugin_languages: yes
@@ -21,7 +21,7 @@ jobs:
           plugin_languages_details: bytes-size, percentage
           committer_branch: main
 
-  # Job 2: Achievements
+  # Job 2: Achievements [https://github.com/gh-metrics/metrics]
   github-metrics-achievements:
     needs: github-metrics-languages
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
       - name: Compact display
         uses: gh-metrics/metrics@master
         with:
-          filename: metrics.plugin.achievements.compact.svg
+          filename: images/stat/metrics.plugin.achievements.compact.svg
           token: ${{ secrets.METRICS_PROFILE_TOKEN }}
           base: ""
           plugin_achievements: yes

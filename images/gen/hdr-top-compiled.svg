@@ -1,0 +1,21 @@
+<svg width="288" height="36" viewBox="0 0 288 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip_compiled">
+      <rect x="0.5" y="0.5" width="287" height="35" rx="8.5"/>
+    </clipPath>
+    <linearGradient id="glow_compiled" x1="144" y1="0" x2="144" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#12161F" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <g clip-path="url(#clip_compiled)">
+    <rect x="0" y="0" width="288" height="36" fill="#12161F"/>
+    <rect x="0" y="0" width="288" height="36" fill="url(#glow_compiled)"/>
+    <rect x="0" y="0" width="288" height="3" fill="#38BDF8"/>
+  </g>
+
+  <rect x="0.5" y="0.5" width="287" height="35" rx="8.5" stroke="#262D3A" stroke-width="1"/>
+
+  <text x="144" y="23" text-anchor="middle" fill="#F0F6FC" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">COMPILED</text>
+</svg>
